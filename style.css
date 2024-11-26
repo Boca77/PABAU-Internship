@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+* {
+  font-family: DM Sans;
+}
+
+.btn {
+  background-color: #54b2d3 !important;
+  color: white !important;
+}
+
+.btn:hover {
+  background-color: white !important;
+  color: #54b2d3 !important;
+  border: 1px solid #54b2d3 !important;
+}
+
+nav {
+  .logo {
+    width: 150px;
+  }
+}
+
+main {
+  background: rgb(238, 247, 251);
+  background: linear-gradient(
+    0deg,
+    rgba(252, 254, 254, 1),
+    rgba(238, 247, 251, 1)
+  );
+}
