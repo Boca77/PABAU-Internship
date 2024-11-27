@@ -17,6 +17,14 @@ class User extends Connection
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getAllUsers()
+    {
+        $stmt = $this->connection->prepare('SELECT * FROM users');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
     public function getUserId($email)
     {
         $stmt = $this->connection->prepare('SELECT id FROM users WHERE email = :email');
