@@ -17,13 +17,13 @@ class User extends Connection
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getAllUsers()
+    public function getAllUsersNotLoggedIn()
     {
-        $stmt = $this->connection->prepare('SELECT * FROM users');
+        $stmt = $this->connection->prepare('SELECT * FROM users WHERE id != :id');
+        $stmt->bindParam(':id', $this->id);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
 
     public function getUserId($email)
     {
@@ -49,5 +49,13 @@ class User extends Connection
         $stmt->bindParam(':email', $credentials['email']);
         $stmt->bindParam(':password', $credentials['password']);
         $stmt->execute();
+    }
+
+    public function checkUserVotes()
+    {
+        $stmt = $this->connection->prepare('SELECT category_id FROM user_vote WHERE voter_id = :id');
+        $stmt->bindParam(':id', $this->id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

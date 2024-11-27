@@ -5,7 +5,9 @@ include_once __DIR__ . '/classes/User.php';
 session_start();
 $getUser = new User($_SESSION['userId'] ?? '');
 $user = $getUser->getUser();
-$users = $getUser->getAllUsers();
+$users = $getUser->getAllUsersNotLoggedIn();
+$userVotes = $getUser->checkUserVotes();
+$categoryIds = array_column($userVotes, 'category_id');
 
 ?>
 
@@ -44,6 +46,8 @@ $users = $getUser->getAllUsers();
     <main class="pt-5 background-gradient">
 
         <div class="container py-5">
+
+            <!-- categories tabs  -->
             <div class="row d-flex justify-content-center">
                 <div class="border rounded px-0">
                     <div class="d-flex text-center">
@@ -62,104 +66,121 @@ $users = $getUser->getAllUsers();
                     </div>
                 </div>
             </div>
+            <!-- categories -->
             <div class="row">
                 <div class="col-12 py-2 border pb-0 rounded">
+
+                    <!-- Makes Work Fun section  -->
                     <div id="MWF-box">
-                        <h3 class="mt-3 border-bottom">Vote for the most fun colleague: </h3>
-                        <?php foreach ($users as $index => $user) : ?>
-                            <form action="" method="POST">
-                                <div class="row align-items-center py-3 <?= ($index === array_key_last($users)) ? 'border-bottom-0' : 'border-bottom' ?>">
-                                    <div class="col-4">
-                                        <p class="mb-0"><?= $user['name'] ?> <?= $user['surname'] ?></p>
-                                    </div>
-                                    <div class="col-4 text-center">
-                                        <input type="text" placeholder="comment" name="comment" class="w-100 form-control">
-                                    </div>
-                                    <div class="col-4 d-flex justify-content-end gap-5 align-items-center
-                                ">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <label for="MWF-vote-<?= $user['id'] ?>">Vote</label>
-                                            <input type="radio" name="vote" id="MWF-vote-<?= $user['id'] ?>" value="<?= $user['id'] ?>">
+                        <?php if (in_array(1, $categoryIds)) : ?>
+                            <h3 class="p-5">You've already voted!</h3>
+                        <?php else : ?>
+                            <h3 class="mt-3 border-bottom">Vote for the most fun colleague: </h3>
+                            <?php foreach ($users as $index => $user) : ?>
+                                <form action="./scripts/vote.php" method="POST">
+                                    <div class="row align-items-center py-3 <?= ($index === array_key_last($users)) ? 'border-bottom-0' : 'border-bottom' ?>">
+                                        <div class="col-4">
+                                            <p class="mb-0"><?= $user['name'] ?> <?= $user['surname'] ?></p>
                                         </div>
-                                        <button class="btn">Vote</button>
+                                        <div class="col-4 text-center">
+                                            <input type="text" placeholder="comment" name="comment" required class="w-100 form-control">
+                                        </div>
+                                        <div class="col-4 d-flex justify-content-center gap-5 align-items-center">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <input type="hidden" value="1" name="category_id">
+                                            </div>
+                                            <button name="nominee_id" value="<?= $user['id'] ?>" class="btn">Vote</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        <?php endforeach; ?>
+                                </form>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
+
+                    <!-- Team Player section -->
                     <div id="TP-box">
-                        <h3 class="mt-3 border-bottom">Vote for the best team player: </h3>
-                        <?php foreach ($users as $index => $user) : ?>
-                            <form action="" method="POST">
-                                <div class="row align-items-center py-3 <?= ($index === array_key_last($users)) ? 'border-bottom-0' : 'border-bottom' ?>">
-                                    <div class="col-4">
-                                        <p class="mb-0"><?= $user['name'] ?> <?= $user['surname'] ?></p>
-                                    </div>
-                                    <div class="col-4 text-center">
-                                        <input type="text" placeholder="comment" name="comment" class="w-100 form-control">
-                                    </div>
-                                    <div class="col-4 d-flex justify-content-end gap-5 align-items-center
-                                ">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <label for="TP-vote-<?= $user['id'] ?>">Vote</label>
-                                            <input type="radio" name="vote" id="TP-vote-<?= $user['id'] ?>" value="<?= $user['id'] ?>">
+                        <?php if (in_array(2, $categoryIds)) : ?>
+                            <h3 class="p-5">You've already voted!</h3>
+                        <?php else : ?>
+                            <h3 class="mt-3 border-bottom">Vote for the best team player: </h3>
+                            <?php foreach ($users as $index => $user) : ?>
+                                <form action="./scripts/vote.php" method="POST">
+                                    <div class="row align-items-center py-3 <?= ($index === array_key_last($users)) ? 'border-bottom-0' : 'border-bottom' ?>">
+                                        <div class="col-4">
+                                            <p class="mb-0"><?= $user['name'] ?> <?= $user['surname'] ?></p>
                                         </div>
-                                        <button class="btn">Vote</button>
-
+                                        <div class="col-4 text-center">
+                                            <input type="text" placeholder="comment" name="comment" required class="w-100 form-control">
+                                        </div>
+                                        <div class="col-4 d-flex justify-content-center gap-5 align-items-center">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <input type="hidden" value="2" name="category_id">
+                                            </div>
+                                            <button name="nominee_id" value="<?= $user['id'] ?>" class="btn">Vote</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        <?php endforeach; ?>
+                                </form>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
+
+                    <!-- Culture Creator section  -->
                     <div id="CC-box">
-                        <h3 class="mt-3 border-bottom">Vote for the best culture creator: </h3>
-                        <?php foreach ($users as $index => $user) : ?>
-                            <form action="" method="POST">
-                                <div class="row align-items-center py-3 <?= ($index === array_key_last($users)) ? 'border-bottom-0' : 'border-bottom' ?>">
-                                    <div class="col-4">
-                                        <p class="mb-0"><?= $user['name'] ?> <?= $user['surname'] ?></p>
-                                    </div>
-                                    <div class="col-4 text-center">
-                                        <input type="text" placeholder="comment" name="comment" class="w-100 form-control">
-                                    </div>
-                                    <div class="col-4 d-flex justify-content-end gap-5 align-items-center
-                                ">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <label for="CC-vote-<?= $user['id'] ?>">Vote</label>
-                                            <input type="radio" name="vote" id="CC-vote-<?= $user['id'] ?>" value="<?= $user['id'] ?>">
+                        <?php if (in_array(3, $categoryIds)) : ?>
+                            <h3 class="p-5">You've already voted!</h3>
+                        <?php else : ?>
+                            <h3 class="mt-3 border-bottom">Vote for the best culture creator: </h3>
+                            <?php foreach ($users as $index => $user) : ?>
+                                <form action="./scripts/vote.php" method="POST">
+                                    <div class="row align-items-center py-3 <?= ($index === array_key_last($users)) ? 'border-bottom-0' : 'border-bottom' ?>">
+                                        <div class="col-4">
+                                            <p class="mb-0"><?= $user['name'] ?> <?= $user['surname'] ?></p>
                                         </div>
-                                        <button class="btn">Vote</button>
+                                        <div class="col-4 text-center">
+                                            <input type="text" placeholder="comment" name="comment" required class="w-100 form-control">
+                                        </div>
+                                        <div class="col-4 d-flex justify-content-center gap-5 align-items-center">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <input type="hidden" value="3" name="category_id">
+                                            </div>
+                                            <button name="nominee_id" value="<?= $user['id'] ?>" class="btn">Vote</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
 
-                                    </div>
-                                </div>
-                            </form>
-                        <?php endforeach; ?>
-                    </div>
+                    <!-- Difference Maker section -->
                     <div id="DM-box">
-                        <h3 class="mt-3 border-bottom">Vote for the best difference maker: </h3>
-                        <?php foreach ($users as $index => $user) : ?>
-                            <form action="" method="POST">
-                                <div class="row align-items-center py-3 <?= ($index === array_key_last($users)) ? 'border-bottom-0' : 'border-bottom' ?>">
-                                    <div class="col-4">
-                                        <p class="mb-0"><?= $user['name'] ?> <?= $user['surname'] ?></p>
-                                    </div>
-                                    <div class="col-4 text-center">
-                                        <input type="text" placeholder="comment" name="comment" class="w-100 form-control">
-                                    </div>
-                                    <div class="col-4 d-flex justify-content-end gap-5 align-items-center
-                                ">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <label for="DM-vote-<?= $user['id'] ?>">Vote</label>
-                                            <input type="radio" name="vote" id="DM-vote-<?= $user['id'] ?>" value="<?= $user['id'] ?>">
+                        <?php if (in_array(4, $categoryIds)) : ?>
+                            <h3 class="p-5">You've already voted!</h3>
+                        <?php else : ?>
+                            <h3 class="mt-3 border-bottom">Vote for the best difference maker: </h3>
+                            <?php foreach ($users as $index => $user) : ?>
+                                <form action="./scripts/vote.php" method="POST">
+                                    <div class="row align-items-center py-3 <?= ($index === array_key_last($users)) ? 'border-bottom-0' : 'border-bottom' ?>">
+                                        <div class="col-4">
+                                            <p class="mb-0"><?= $user['name'] ?> <?= $user['surname'] ?></p>
                                         </div>
-                                        <button class="btn">Vote</button>
+                                        <div class="col-4 text-center">
+                                            <input type="text" placeholder="comment" name="comment" required class="w-100 form-control">
+                                        </div>
+                                        <div class="col-4 d-flex justify-content-center gap-5 align-items-center">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <input type="hidden" value="4" name="category_id">
+                                            </div>
+                                            <button name="nominee_id" value="<?= $user['id'] ?>" class="btn">Vote</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        <?php endforeach; ?>
+                                </form>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
+
                 </div>
             </div>
+        </div>
     </main>
     <script src="./js/vote.js"></script>
 </body>
