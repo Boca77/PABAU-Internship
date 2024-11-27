@@ -19,4 +19,53 @@ class Vote extends Connection
         $stmt->bindParam(':time_stamp', $vote['time_stamp']);
         $stmt->execute();
     }
+
+    public function getMwfVotes()
+    {
+        $stmt = $this->connection->prepare('SELECT user.id, users.name, users.surname, COUNT(user_vote.id) AS vote_count
+        FROM user_vote
+        JOIN users 
+        ON user_vote.nominee_id = users.id
+        WHERE user_vote.category_id = 1
+        GROUP BY users.id, users.name, users.surname
+        ORDER BY vote_count DESC');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getTpVotes()
+    {
+        $stmt = $this->connection->prepare('SELECT user.id, users.name, users.surname, COUNT(user_vote.id) AS vote_count
+        FROM user_vote
+        JOIN users 
+        ON user_vote.nominee_id = users.id
+        WHERE user_vote.category_id = 2
+        GROUP BY users.id, users.name, users.surname
+        ORDER BY vote_count DESC');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getCcVotes()
+    {
+        $stmt = $this->connection->prepare('SELECT user.id, users.name, users.surname, COUNT(user_vote.id) AS vote_count
+        FROM user_vote
+        JOIN users 
+        ON user_vote.nominee_id = users.id
+        WHERE user_vote.category_id = 3
+        GROUP BY users.id, users.name, users.surname
+        ORDER BY vote_count DESC');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getDmVotes()
+    {
+        $stmt = $this->connection->prepare('SELECT user.id, users.name, users.surname, COUNT(user_vote.id) AS vote_count
+        FROM user_vote
+        JOIN users 
+        ON user_vote.nominee_id = users.id
+        WHERE user_vote.category_id = 4
+        GROUP BY users.id, users.name, users.surname
+        ORDER BY vote_count DESC');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

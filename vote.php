@@ -28,27 +28,7 @@ $categoryIds = array_column($userVotes, 'category_id');
 <body>
 
     <!-- nav-bar -->
-    <nav>
-        <div class="container d-flex justify-content-between py-3">
-
-            <!-- logo image -->
-            <img src="./imgs/logo.png" class="logo" alt="Logo" />
-
-            <!-- login and register buttons -->
-            <div class="d-flex gap-3">
-                <?php
-                if ($user) {
-                    echo '<p class="m-0 d-flex align-items-center">Hi! ' . $user['name'] . '</p>';
-                    echo '<a href="./scripts/logout.php" class="m-0 d-flex align-items-center">LogOut</a>';
-                } else {
-                    echo '<a href="./login-register.php" class="text-decoration-none">
-                <button class="btn">Login/Register</button>
-              </a>';
-                }
-                ?>
-            </div>
-        </div>
-    </nav>
+    <?php include('./components/nav.php') ?>
 
     <!-- main content -->
     <main class="pt-5 background-gradient">
@@ -74,6 +54,7 @@ $categoryIds = array_column($userVotes, 'category_id');
                     </div>
                 </div>
             </div>
+
             <!-- categories -->
             <div class="row">
                 <div class="col-12 py-2 border pb-0 rounded">

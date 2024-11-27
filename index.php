@@ -17,27 +17,7 @@ $errorMsg = $_GET['errorLogin'] ?? '';
 <body>
 
   <!-- nav-bar -->
-  <nav>
-    <div class="container d-flex justify-content-between py-3">
-
-      <!-- logo image -->
-      <img src="./imgs/logo.png" class="logo" alt="Logo" />
-
-      <!-- login and register buttons -->
-      <div class="d-flex gap-3">
-        <?php
-        if ($user) {
-          echo '<p class="m-0 d-flex align-items-center">Hi! ' . $user['name'] . '</p>';
-          echo '<a href="./scripts/logout.php" class="m-0 d-flex align-items-center">LogOut</a>';
-        } else {
-          echo '<a href="./login-register.php" class="text-decoration-none">
-                <button class="btn">Login/Register</button>
-              </a>';
-        }
-        ?>
-      </div>
-    </div>
-  </nav>
+  <?php include('./components/nav.php') ?>
 
   <!-- main content -->
   <main class="pt-5 background-gradient">
@@ -69,7 +49,7 @@ $errorMsg = $_GET['errorLogin'] ?? '';
           </a>
         </div>
         <div class="col-6 col-sm-4 col-md-2">
-          <a href="./index.html" class="text-decoration-none">
+          <a href="./leaderboard.php" class="text-decoration-none">
             <button class="btn w-100">View leaderboard</button>
           </a>
         </div>
