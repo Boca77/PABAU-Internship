@@ -64,7 +64,7 @@ $user = $getUser->getUser();
       <!-- navigation buttons -->
       <div class="row d-flex justify-content-center mt-5">
         <div class="col-6 col-sm-4 col-md-2 text-center">
-          <a href="./index.html" class="text-decoration-none">
+          <a href="./vote.php" class="text-decoration-none">
             <button class="btn w-100">Vote!</button>
           </a>
         </div>
