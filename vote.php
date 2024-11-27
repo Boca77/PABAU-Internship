@@ -3,6 +3,13 @@
 include_once __DIR__ . '/classes/User.php';
 
 session_start();
+
+// check if user is logged-in 
+if (empty($_SESSION['userId'])) {
+    return header('Location: index.php?errorLogin=Please login first');
+}
+
+
 $getUser = new User($_SESSION['userId'] ?? '');
 $user = $getUser->getUser();
 $users = $getUser->getAllUsersNotLoggedIn();

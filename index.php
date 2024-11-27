@@ -5,7 +5,7 @@ include_once __DIR__ . '/classes/User.php';
 session_start();
 $getUser = new User($_SESSION['userId'] ?? '');
 $user = $getUser->getUser();
-
+$errorMsg = $_GET['errorLogin'] ?? '';
 ?>
 
 <!DOCTYPE html>
@@ -76,8 +76,13 @@ $user = $getUser->getUser();
 
       </div>
       <div class="row d-flex justify-content-center">
-        <div class="col-6 text-center mt-2">
+        <div class="col-6 d-flex flex-column text-center mt-2">
           <small class="text-secondary">*You must be logged in to vote or view the leader board</small>
+          <?php
+          if ($errorMsg) {
+            echo '<small class="text-danger fs-5">' . $errorMsg . '</small>';
+          }
+          ?>
         </div>
       </div>
     </div>
