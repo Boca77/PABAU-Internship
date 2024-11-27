@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include('./components/head.php') ?>
@@ -23,10 +27,10 @@
 
                     <!-- login form  -->
                     <div id="login">
-                        <form action="" class="pb-5 px-5">
+                        <form action="./scripts/login.php" method="POST" class="pb-5 px-5">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control" id="email">
+                                <input type="email" name="email" class="form-control" id="email" value="<?php echo isset($_SESSION['oldLogin']['email']) ? $_SESSION['oldLogin']['email'] : '' ?>">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
@@ -38,18 +42,18 @@
 
                     <!-- register form  -->
                     <div id="register">
-                        <form action="" class="pb-5 px-5">
+                        <form action="./scripts/register.php" method="POST" class="pb-5 px-5">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" name="name" class="form-control" id="name">
+                                <input type="text" name="name" class="form-control" id="name" value="<?php echo isset($_SESSION['oldRegister']['name']) ? $_SESSION['oldRegister']['name'] : '' ?>">
                             </div>
                             <div class="mb-3">
                                 <label for="surname" class="form-label">Surname</label>
-                                <input type="text" name="surname" class="form-control" id="surname">
+                                <input type="text" name="surname" class="form-control" id="surname" value="<?php echo isset($_SESSION['oldRegister']['surname']) ? $_SESSION['oldRegister']['surname'] : '' ?>">
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control" id="email">
+                                <input type="email" name="email" class="form-control" id="email" value="<?php echo isset($_SESSION['oldRegister']['email']) ? $_SESSION['oldRegister']['email'] : '' ?>">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>

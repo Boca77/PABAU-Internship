@@ -1,5 +1,6 @@
 <?php
 
+// Class for establishing connection with database
 class Connection
 {
     const HOST = 'localhost';
@@ -18,11 +19,13 @@ class Connection
         );
     }
 
+    // start the connection
     public function getConnection()
     {
         return $this->connection;
     }
 
+    // close connection 
     public function destroyConnection()
     {
         $this->connection = null;

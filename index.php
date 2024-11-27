@@ -1,3 +1,13 @@
+<?php
+
+include_once __DIR__ . '/classes/User.php';
+
+session_start();
+$getUser = new User($_SESSION['userId'] ?? '');
+$user = $getUser->getUser();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,9 +25,16 @@
 
       <!-- login and register buttons -->
       <div class="d-flex gap-3">
-        <a href="./login-register.php" class="text-decoration-none">
-          <button class="btn">Login/Register</button>
-        </a>
+        <?php
+        if ($user) {
+          echo '<p class="m-0 d-flex align-items-center">Hi! ' . $user['name'] . '</p>';
+          echo '<a href="./scripts/logout.php" class="m-0 d-flex align-items-center">LogOut</a>';
+        } else {
+          echo '<a href="./login-register.php" class="text-decoration-none">
+                <button class="btn">Login/Register</button>
+              </a>';
+        }
+        ?>
       </div>
     </div>
   </nav>
@@ -56,9 +73,15 @@
             <button class="btn w-100">View leaderboard</button>
           </a>
         </div>
-      </div>
 
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-6 text-center mt-2">
+          <small class="text-secondary">*You must be logged in to vote or view the leader board</small>
+        </div>
+      </div>
     </div>
+
   </main>
 </body>
 
