@@ -20,11 +20,20 @@ nav {
   }
 }
 
-main {
+.background-gradient {
   background: rgb(238, 247, 251);
   background: linear-gradient(
     0deg,
     rgba(252, 254, 254, 1),
     rgba(238, 247, 251, 1)
   );
+}
+
+.active {
+  background-color: #54b2d3 !important;
+  color: white;
+}
+
+.pointer {
+  cursor: pointer;
 }

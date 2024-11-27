@@ -15,18 +15,15 @@
 
       <!-- login and register buttons -->
       <div class="d-flex gap-3">
-        <a href="./index.html" class="text-decoration-none">
-          <button class="btn">Login</button>
-        </a>
-        <a href="./index.html" class="text-decoration-none">
-          <button class="btn">Register</button>
+        <a href="./login-register.php" class="text-decoration-none">
+          <button class="btn">Login/Register</button>
         </a>
       </div>
     </div>
   </nav>
 
   <!-- main content -->
-  <main class="pt-5">
+  <main class="pt-5 background-gradient">
     <div class="container py-5">
 
       <div class="row d-flex justify-content-center">
