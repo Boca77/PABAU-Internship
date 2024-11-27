@@ -9,6 +9,7 @@ if (empty($_SESSION['userId'])) {
     return header('Location: index.php?errorLogin=Please login first');
 }
 
+$voteError = $_GET['voteError'] ?? '';
 
 $getUser = new User($_SESSION['userId'] ?? '');
 $user = $getUser->getUser();
@@ -82,7 +83,12 @@ $categoryIds = array_column($userVotes, 'category_id');
                         <?php if (in_array(1, $categoryIds)) : ?>
                             <h3 class="p-5">You've already voted!</h3>
                         <?php else : ?>
-                            <h3 class="mt-3 border-bottom">Vote for the most fun colleague: </h3>
+                            <div class="border-bottom">
+                                <h3 class="mt-3 ">Vote for the most fun colleague: </h3>
+                                <?php if ($voteError) {
+                                    echo '<small class="text-danger fs-5">' . $voteError . '</small>';
+                                } ?>
+                            </div>
                             <?php foreach ($users as $index => $user) : ?>
                                 <form action="./scripts/vote.php" method="POST">
                                     <div class="row align-items-center py-3 <?= ($index === array_key_last($users)) ? 'border-bottom-0' : 'border-bottom' ?>">
@@ -109,7 +115,12 @@ $categoryIds = array_column($userVotes, 'category_id');
                         <?php if (in_array(2, $categoryIds)) : ?>
                             <h3 class="p-5">You've already voted!</h3>
                         <?php else : ?>
-                            <h3 class="mt-3 border-bottom">Vote for the best team player: </h3>
+                            <div class="border-bottom">
+                                <h3 class="mt-3">Vote for the best team player: </h3>
+                                <?php if ($voteError) {
+                                    echo '<small class="text-danger fs-5">' . $voteError . '</small>';
+                                } ?>
+                            </div>
                             <?php foreach ($users as $index => $user) : ?>
                                 <form action="./scripts/vote.php" method="POST">
                                     <div class="row align-items-center py-3 <?= ($index === array_key_last($users)) ? 'border-bottom-0' : 'border-bottom' ?>">
@@ -136,7 +147,12 @@ $categoryIds = array_column($userVotes, 'category_id');
                         <?php if (in_array(3, $categoryIds)) : ?>
                             <h3 class="p-5">You've already voted!</h3>
                         <?php else : ?>
-                            <h3 class="mt-3 border-bottom">Vote for the best culture creator: </h3>
+                            <div class="border-bottom">
+                                <h3 class="mt-3">Vote for the best culture creator: </h3>
+                                <?php if ($voteError) {
+                                    echo '<small class="text-danger fs-5">' . $voteError . '</small>';
+                                } ?>
+                            </div>
                             <?php foreach ($users as $index => $user) : ?>
                                 <form action="./scripts/vote.php" method="POST">
                                     <div class="row align-items-center py-3 <?= ($index === array_key_last($users)) ? 'border-bottom-0' : 'border-bottom' ?>">
@@ -163,7 +179,12 @@ $categoryIds = array_column($userVotes, 'category_id');
                         <?php if (in_array(4, $categoryIds)) : ?>
                             <h3 class="p-5">You've already voted!</h3>
                         <?php else : ?>
-                            <h3 class="mt-3 border-bottom">Vote for the best difference maker: </h3>
+                            <div class="border-bottom">
+                                <h3 class="mt-3">Vote for the best difference maker: </h3>
+                                <?php if ($voteError) {
+                                    echo '<small class="text-danger fs-5">' . $voteError . '</small>';
+                                } ?>
+                            </div>
                             <?php foreach ($users as $index => $user) : ?>
                                 <form action="./scripts/vote.php" method="POST">
                                     <div class="row align-items-center py-3 <?= ($index === array_key_last($users)) ? 'border-bottom-0' : 'border-bottom' ?>">

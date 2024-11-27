@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+$errorLogin = $_GET['errorLogin'] ?? '';
+$errorRegister = $_GET['errorRegister'] ?? '';
+
 ?>
 
 <!DOCTYPE html>
@@ -28,14 +32,26 @@ session_start();
                     <!-- login form  -->
                     <div id="login">
                         <form action="./scripts/login.php" method="POST" class="pb-5 px-5">
+
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" name="email" class="form-control" id="email" value="<?php echo isset($_SESSION['oldLogin']['email']) ? $_SESSION['oldLogin']['email'] : '' ?>">
+
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" name="password" class="form-control" id="password">
                             </div>
+
+                            <?php
+                            if ($errorLogin) {
+
+                                echo '<div class="mb-3 w-100 alert alert-danger">
+                                        <small>' . $errorLogin . '</small>   
+                                      </div>';
+                            }
+                            ?>
+
                             <button type="submit" class="btn">Login</button>
                         </form>
                     </div>
@@ -59,6 +75,13 @@ session_start();
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" name="password" class="form-control" id="password">
                             </div>
+                            <?php
+                            if ($errorRegister) {
+                                echo '<div class="mb-3 w-100 alert alert-danger">
+                                        <small>' . $errorRegister . '</small>   
+                                      </div>';
+                            }
+                            ?>
                             <button type="submit" class="btn">Register</button>
                         </form>
                     </div>
