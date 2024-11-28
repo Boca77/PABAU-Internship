@@ -15,13 +15,11 @@ if (!isset($_SESSION['userId'])) {
 $getUser = new User($_SESSION['userId']);
 $user = $getUser->getUser();
 
-$pdf->Image('./background.png', -40, 0, 350, 210);
-
 // Create a new PDF instance in Landscape orientation
 $pdf = new FPDF('L', 'mm', 'A4');
 $pdf->AddPage();
 
-
+$pdf->Image('./background.png', -40, 0, 350, 210);
 // Set font for the certificate title
 $pdf->SetFont('Arial', 'B', 24);
 

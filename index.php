@@ -35,6 +35,7 @@ $dm = $votes->getDmVotes();
       </div>
     </div>
   <?php endif ?>
+
   <?php if (($user['id'] ?? '') === $tp[0]['id']) : ?>
     <div class="w-100 bg-info d-flex justify-content-center border border-bottom border-top">
       <div class="col-12 text-center col-md-6">
@@ -42,6 +43,7 @@ $dm = $votes->getDmVotes();
       </div>
     </div>
   <?php endif ?>
+
   <?php if (($user['id'] ?? '') === $cc[0]['id']) : ?>
     <div class="w-100 bg-info d-flex justify-content-center border border-bottom border-top">
       <div class="col-12 text-center col-md-6">
@@ -49,6 +51,7 @@ $dm = $votes->getDmVotes();
       </div>
     </div>
   <?php endif ?>
+
   <?php if (($user['id'] ?? '') === $dm[0]['id']) : ?>
     <div class="w-100 bg-info d-flex justify-content-center border border-bottom border-top">
       <div class="col-12 text-center col-md-6">
