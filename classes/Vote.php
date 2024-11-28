@@ -22,7 +22,7 @@ class Vote extends Connection
 
     public function getMwfVotes()
     {
-        $stmt = $this->connection->prepare('SELECT user.id, users.name, users.surname, COUNT(user_vote.id) AS vote_count
+        $stmt = $this->connection->prepare('SELECT users.id, users.name, users.surname, COUNT(user_vote.id) AS vote_count
         FROM user_vote
         JOIN users 
         ON user_vote.nominee_id = users.id
@@ -34,7 +34,7 @@ class Vote extends Connection
     }
     public function getTpVotes()
     {
-        $stmt = $this->connection->prepare('SELECT user.id, users.name, users.surname, COUNT(user_vote.id) AS vote_count
+        $stmt = $this->connection->prepare('SELECT users.id, users.name, users.surname, COUNT(user_vote.id) AS vote_count
         FROM user_vote
         JOIN users 
         ON user_vote.nominee_id = users.id
@@ -46,7 +46,7 @@ class Vote extends Connection
     }
     public function getCcVotes()
     {
-        $stmt = $this->connection->prepare('SELECT user.id, users.name, users.surname, COUNT(user_vote.id) AS vote_count
+        $stmt = $this->connection->prepare('SELECT users.id, users.name, users.surname, COUNT(user_vote.id) AS vote_count
         FROM user_vote
         JOIN users 
         ON user_vote.nominee_id = users.id
@@ -58,7 +58,7 @@ class Vote extends Connection
     }
     public function getDmVotes()
     {
-        $stmt = $this->connection->prepare('SELECT user.id, users.name, users.surname, COUNT(user_vote.id) AS vote_count
+        $stmt = $this->connection->prepare('SELECT users.id, users.name, users.surname, COUNT(user_vote.id) AS vote_count
         FROM user_vote
         JOIN users 
         ON user_vote.nominee_id = users.id

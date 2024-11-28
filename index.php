@@ -1,11 +1,20 @@
 <?php
 
 include_once __DIR__ . '/classes/User.php';
+include_once __DIR__ . '/classes/Vote.php';
 
 session_start();
 $getUser = new User($_SESSION['userId'] ?? '');
 $user = $getUser->getUser();
 $errorMsg = $_GET['errorLogin'] ?? '';
+
+$votes = new Vote();
+$mwf = $votes->getMwfVotes();
+$tp = $votes->getTpVotes();
+$cc = $votes->getCcVotes();
+$dm = $votes->getDmVotes();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +27,38 @@ $errorMsg = $_GET['errorLogin'] ?? '';
 
   <!-- nav-bar -->
   <?php include('./components/nav.php') ?>
+
+  <?php if (($user['id'] ?? '') === $mwf[0]['id']) : ?>
+    <div class="w-100 bg-info d-flex justify-content-center border border-bottom border-top">
+      <div class="col-12 text-center col-md-6">
+        <h4 class="mb-0 py-3">Congratulations on being voted the Most Fun Coworker <a href="./certificate/certificateMFW.php" class="text-white fs-6">Collect certificate here!</a></h4>
+      </div>
+    </div>
+  <?php endif ?>
+  <?php if (($user['id'] ?? '') === $tp[0]['id']) : ?>
+    <div class="w-100 bg-info d-flex justify-content-center border border-bottom border-top">
+      <div class="col-12 text-center col-md-6">
+        <h4 class="mb-0 py-3">Congratulations on being voted the Best Team Player <a href="./certificate/certificateBTP.php" class="text-white fs-6">Collect certificate here!</a></h4>
+      </div>
+    </div>
+  <?php endif ?>
+  <?php if (($user['id'] ?? '') === $cc[0]['id']) : ?>
+    <div class="w-100 bg-info d-flex justify-content-center border border-bottom border-top">
+      <div class="col-12 text-center col-md-6">
+        <h4 class="mb-0 py-3">Congratulations on being voted the Best Culture Creator <a href="./certificate/certificateCC.php" class="text-white fs-6">Collect certificate here!</a></h4>
+      </div>
+    </div>
+  <?php endif ?>
+  <?php if (($user['id'] ?? '') === $dm[0]['id']) : ?>
+    <div class="w-100 bg-info d-flex justify-content-center border border-bottom border-top">
+      <div class="col-12 text-center col-md-6">
+        <h4 class="mb-0 py-3">Congratulations on being voted the Biggest Difference Maker <a href="./certificate/certificateDM.php" class="text-white fs-6">Collect certificate here!</a></h4>
+      </div>
+    </div>
+  <?php endif ?>
+
+
+
 
   <!-- main content -->
   <main class="pt-5 background-gradient">
