@@ -68,4 +68,16 @@ class Vote extends Connection
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getMostFrequentVoter()
+    {
+        $stmt = $this->connection->prepare('SELECT users.id, users.name, users.surname, COUNT(user_vote.id) AS vote_count
+        FROM user_vote
+        JOIN users 
+        ON user_vote.voter_id = users.id
+        GROUP BY users.id, users.name, users.surname
+        ORDER BY vote_count DESC
+        LIMIT 1');
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

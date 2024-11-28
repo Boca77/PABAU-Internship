@@ -13,6 +13,7 @@ $getUser = new User($_SESSION['userId'] ?? '');
 $user = $getUser->getUser();
 
 $votes = new Vote();
+$mostFrequentVoter = $votes->getMostFrequentVoter();
 $mwf = $votes->getMwfVotes();
 $tp = $votes->getTpVotes();
 $cc = $votes->getCcVotes();
@@ -29,8 +30,14 @@ $dm = $votes->getDmVotes();
 
         <div class="container py-5">
             <h1>Leaderboard</h1>
+
             <!-- categories tabs  -->
             <div class="row d-flex justify-content-center">
+                <?php
+                if ($mostFrequentVoter) {
+                    echo '<p>Most frequent voter is: <span class="fw-bold">' . $mostFrequentVoter["name"] . ' ' . $mostFrequentVoter['surname'] . '</span></p>';
+                }
+                ?>
                 <div class="border rounded px-0">
                     <div class="d-flex text-center">
                         <div id="MWF" class="col-3 px-3 py-2 pointer border-end rounded-start active">
