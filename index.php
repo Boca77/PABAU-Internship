@@ -14,7 +14,6 @@ $tp = $votes->getTpVotes();
 $cc = $votes->getCcVotes();
 $dm = $votes->getDmVotes();
 
-
 ?>
 
 <!DOCTYPE html>
@@ -28,37 +27,35 @@ $dm = $votes->getDmVotes();
   <!-- nav-bar -->
   <?php include('./components/nav.php') ?>
 
+  <!-- Check if user has won a certificate -->
   <?php if (($user['id'] ?? '') === $mwf[0]['id']) : ?>
     <div class="w-100 bg-info d-flex justify-content-center border border-bottom border-top">
       <div class="col-12 text-center col-md-6">
-        <h4 class="mb-0 py-3">Congratulations on being voted the Most Fun Coworker <a href="./certificate/certificateMFW.php" class="text-white fs-6">Collect certificate here!</a></h4>
+        <h4 class="mb-0 py-3 fs-5">Congratulations on being voted the Most Fun Coworker <a href="./certificate/certificateMFW.php" class="text-white fs-6">Collect certificate here!</a></h4>
       </div>
     </div>
   <?php endif ?>
   <?php if (($user['id'] ?? '') === $tp[0]['id']) : ?>
     <div class="w-100 bg-info d-flex justify-content-center border border-bottom border-top">
       <div class="col-12 text-center col-md-6">
-        <h4 class="mb-0 py-3">Congratulations on being voted the Best Team Player <a href="./certificate/certificateBTP.php" class="text-white fs-6">Collect certificate here!</a></h4>
+        <h4 class="mb-0 py-3 fs-5">Congratulations on being voted the Best Team Player <a href="./certificate/certificateBTP.php" class="text-white fs-6">Collect certificate here!</a></h4>
       </div>
     </div>
   <?php endif ?>
   <?php if (($user['id'] ?? '') === $cc[0]['id']) : ?>
     <div class="w-100 bg-info d-flex justify-content-center border border-bottom border-top">
       <div class="col-12 text-center col-md-6">
-        <h4 class="mb-0 py-3">Congratulations on being voted the Best Culture Creator <a href="./certificate/certificateCC.php" class="text-white fs-6">Collect certificate here!</a></h4>
+        <h4 class="mb-0 py-3 fs-5">Congratulations on being voted the Best Culture Creator <a href="./certificate/certificateCC.php" class="text-white fs-6">Collect certificate here!</a></h4>
       </div>
     </div>
   <?php endif ?>
   <?php if (($user['id'] ?? '') === $dm[0]['id']) : ?>
     <div class="w-100 bg-info d-flex justify-content-center border border-bottom border-top">
       <div class="col-12 text-center col-md-6">
-        <h4 class="mb-0 py-3">Congratulations on being voted the Biggest Difference Maker <a href="./certificate/certificateDM.php" class="text-white fs-6">Collect certificate here!</a></h4>
+        <h4 class="mb-0 py-3 fs-5">Congratulations on being voted the Biggest Difference Maker <a href="./certificate/certificateDM.php" class="text-white fs-6">Collect certificate here!</a></h4>
       </div>
     </div>
   <?php endif ?>
-
-
-
 
   <!-- main content -->
   <main class="pt-5 background-gradient">

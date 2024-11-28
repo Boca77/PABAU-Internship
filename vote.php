@@ -61,6 +61,9 @@ $categoryIds = array_column($userVotes, 'category_id');
 
                     <!-- Makes Work Fun section  -->
                     <div id="MWF-box">
+                        <?php if (empty($users)) {
+                            echo '<h3 class="p-5">No users registered</h3>';
+                        } ?>
                         <?php if (in_array(1, $categoryIds)) : ?>
                             <h3 class="p-5">You've already voted!</h3>
                         <?php else : ?>
@@ -93,6 +96,9 @@ $categoryIds = array_column($userVotes, 'category_id');
 
                     <!-- Team Player section -->
                     <div id="TP-box">
+                        <?php if (empty($users)) {
+                            echo '<h3 class="p-5">No users registered</h3>';
+                        } ?>
                         <?php if (in_array(2, $categoryIds)) : ?>
                             <h3 class="p-5">You've already voted!</h3>
                         <?php else : ?>
@@ -125,6 +131,9 @@ $categoryIds = array_column($userVotes, 'category_id');
 
                     <!-- Culture Creator section  -->
                     <div id="CC-box">
+                        <?php if (empty($users)) {
+                            echo '<h3 class="p-5">No users registered</h3>';
+                        } ?>
                         <?php if (in_array(3, $categoryIds)) : ?>
                             <h3 class="p-5">You've already voted!</h3>
                         <?php else : ?>
@@ -157,6 +166,9 @@ $categoryIds = array_column($userVotes, 'category_id');
 
                     <!-- Difference Maker section -->
                     <div id="DM-box">
+                        <?php if (empty($users)) {
+                            echo '<h3 class="p-5">No users registered</h3>';
+                        } ?>
                         <?php if (in_array(4, $categoryIds)) : ?>
                             <h3 class="p-5">You've already voted!</h3>
                         <?php else : ?>

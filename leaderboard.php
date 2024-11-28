@@ -4,6 +4,11 @@ include_once __DIR__ . '/classes/Vote.php';
 
 session_start();
 
+// check if user is logged-in 
+if (empty($_SESSION['userId'])) {
+    return header('Location: index.php?errorLogin=Please login first');
+}
+
 $getUser = new User($_SESSION['userId'] ?? '');
 $user = $getUser->getUser();
 
@@ -48,6 +53,9 @@ $dm = $votes->getDmVotes();
             <div class="row">
                 <div class="col-12 border rounded">
                     <div id="MWF-box">
+                        <?php if (empty($mwf)) {
+                            echo '<h3 class="p-5">No votes</h3>';
+                        } ?>
                         <?php foreach ($mwf as $key => $nominee) : ?>
                             <div class="row 
                             <?= ($key === array_key_last($mwf)) ? 'border-bottom-0' : 'border-bottom' ?> 
@@ -66,6 +74,9 @@ $dm = $votes->getDmVotes();
                     </div>
 
                     <div id="TP-box">
+                        <?php if (empty($tp)) {
+                            echo '<h3 class="p-5">No votes</h3>';
+                        } ?>
                         <?php foreach ($tp as $key => $nominee) : ?>
                             <div class="row 
                             <?= ($key === array_key_last($tp)) ? 'border-bottom-0' : 'border-bottom' ?> 
@@ -84,6 +95,9 @@ $dm = $votes->getDmVotes();
                     </div>
 
                     <div id="CC-box">
+                        <?php if (empty($cc)) {
+                            echo '<h3 class="p-5">No vote</h3>';
+                        } ?>
                         <?php foreach ($cc as $key => $nominee) : ?>
                             <div class="row 
                             <?= ($key === array_key_last($cc)) ? 'border-bottom-0' : 'border-bottom' ?> 
@@ -102,6 +116,9 @@ $dm = $votes->getDmVotes();
                     </div>
 
                     <div id="DM-box">
+                        <?php if (empty($dm)) {
+                            echo '<h3 class="p-5">No votes</h3>';
+                        } ?>
                         <?php foreach ($dm as $key => $nominee) : ?>
                             <div class="row 
                             <?= ($key === array_key_last($dm)) ? 'border-bottom-0' : 'border-bottom' ?> 
@@ -118,6 +135,7 @@ $dm = $votes->getDmVotes();
                             </div>
                         <?php endforeach; ?>
                     </div>
+
                 </div>
             </div>
         </div>
